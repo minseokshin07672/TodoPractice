@@ -4,6 +4,7 @@ import {
   SafeAreaView,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
+import MainScreen from './screens/MainScreen';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -21,7 +22,7 @@ function AppContent() {
 
   return (
     <SafeAreaView style={styles.container}>
-            <Text style={{fontSize: 24}}>Hello RN!</Text>
+      <MainScreen />
     </SafeAreaView>
   );
 }
