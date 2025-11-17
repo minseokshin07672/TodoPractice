@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, Text, Pressable } from 'react-native';
+import { View, StyleSheet, Text, Pressable, Dimensions } from 'react-native';
 import CalendarItem from './CalendarItem';
+import theme from '../styles/theme';
 
 interface CalendarProps {
+    year: number;
     month: number;
     focusedDay: number | null;
     todoDates: number[];
@@ -14,7 +16,11 @@ interface CalendarProps {
 
 const weekdayLabels = ['월', '화', '수', '목', '금', '토', '일'];
 
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const CELL_SIZE = SCREEN_WIDTH / 7;
+
 export default function Calendar({
+    year,
     month,
     focusedDay,
     todoDates,
@@ -23,7 +29,6 @@ export default function Calendar({
     onSelectDay,
     theme,
 }: CalendarProps) {
-    const year = 2025;
     const today = new Date();
 
     const isThisMonth =
@@ -58,7 +63,10 @@ export default function Calendar({
                     <Text style={styles.headerBtn}>이전 달</Text>
                 </Pressable>
 
-                <Text style={styles.headerMonth}>{month}월</Text>
+                <View style={styles.headerCenter}>
+                    <Text style={styles.headerYear}>{year}년</Text>
+                    <Text style={styles.headerMonth}>{month}월</Text>
+                </View>
 
                 <Pressable onPress={onNextMonth}>
                     <Text style={styles.headerBtn}>다음 달</Text>
@@ -111,18 +119,30 @@ const styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
         marginBottom: 12,
         paddingHorizontal: 16,
     },
 
     headerBtn: {
-        fontSize: 18,
-        fontWeight: '600',
+        fontSize: theme.fontRegular,
+        fontWeight: theme.weightSemiBold,
+    },
+
+    headerCenter: {
+        alignItems: 'center',
+    },
+
+    headerYear: {
+        fontSize: theme.fontTiny,
+        fontWeight: theme.weightMedium,
+        color: theme.mainGrey,
+        marginBottom: 2,
     },
 
     headerMonth: {
-        fontSize: 22,
-        fontWeight: '700',
+        fontSize: theme.fontMedium,
+        fontWeight: theme.weightBold,
     },
 
     weekdayRow: {
@@ -130,14 +150,14 @@ const styles = StyleSheet.create({
     },
 
     weekdayCell: {
-        flex: 1,
+        width: CELL_SIZE,
         alignItems: 'center',
         paddingVertical: 4,
     },
 
     weekdayText: {
-        fontSize: 14,
-        fontWeight: '600',
+        fontSize: theme.fontMicro,
+        fontWeight: theme.weightSemiBold,
     },
 
     weekRow: {
@@ -145,8 +165,8 @@ const styles = StyleSheet.create({
     },
 
     dayCell: {
-        flex: 1,
-        aspectRatio: 1,
+        width: CELL_SIZE,
+        height: CELL_SIZE,
         alignItems: 'center',
         justifyContent: 'center',
     },
