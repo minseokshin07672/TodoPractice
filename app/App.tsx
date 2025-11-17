@@ -5,6 +5,7 @@ import {
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 import MainScreen from './screens/MainScreen';
+import theme from './styles/theme';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';

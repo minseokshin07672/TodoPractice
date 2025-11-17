@@ -2,14 +2,15 @@
   "extends": "@react-native/typescript-config",
   "include": [
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "**/*.d.ts"
   ],
   "exclude": [
     "**/node_modules",
     "**/Pods"
   ],
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": "./app",
     "paths": {
       "@/*": [
         "./*"
@@ -23,6 +24,9 @@
       "@assets/*": [
         "assets/*"
       ],
-    }
+    },
+    "types": [
+      "@types/styled-components-react-native"
+    ]
   }
 }
